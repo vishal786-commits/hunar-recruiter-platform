@@ -14,7 +14,7 @@ if not api_key:
 
 BASE_URL = "https://api.voice.hunar.ai/external/v1"
 
-AGENT_ID = "af122bd9-1bc1-4277-b166-f0ae19d286b3"
+AGENT_ID = "140d7bbd-a8eb-4808-8b27-2cbf28470196"
 # voice_name	:	Neha
 # summary	:	This AI agent conducts brief courtesy calls to verify candidate identity and assess availability for new job opportunities, primarily serving recruiting firms in the human resources industry.
 
@@ -26,13 +26,15 @@ headers = {
 
 call_data = {
     "agent_id": AGENT_ID,
-    "callee_name": "Mahesh",
-    "mobile_number": "+918951409278",
+    "callee_name": "Akshaya",
+    "mobile_number": "+917022633193",
     "custom_data": {
-    "company": "Revolut",
-    "role_title": "Quality Control Analyst"
+    "company": "Microsoft",
+    "role_title": "Chief Design Officer",
+    "key_requirements": "figma, cursor, sqlite", 
+    "job_title": "Senior Designer"
     },
-    "request_id": "hunar-recruiter-test-004",
+    "request_id": "hunar-recruiter-test-006",
 }
 
 

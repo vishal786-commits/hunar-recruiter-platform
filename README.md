@@ -1,3 +1,4 @@
 Hunar Recruiter Platform
 
 A rough plan for an AI-powered recruiter platform built as part of the Hunar.ai Forward Deployed Engineer assignment. The idea is to help recruiters move from a job description toward candidate discovery, screening, and review, potentially using AI voice interviews and a recruiter-facing dashboard. The project is currently in development, and the architecture, workflow, and specific technologies will be explored incrementally as the implementation takes shape.
+![alt text](image.png)

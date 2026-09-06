@@ -1,2 +1,9 @@
 python-dotenv
 httpx
+requests
+fastapi 
+uvicorn 
+python-multipart 
+pypdf 
+python-docx
+openai

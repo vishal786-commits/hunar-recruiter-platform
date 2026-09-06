@@ -1,0 +1,131 @@
+AI Engineer- job post
+Evam Labs
+Bangalore Corporation Building, Bengaluru, Karnataka
+₹4,76,375.63 - ₹17,76,312.74 a year
+Evam Labs
+Bangalore Corporation Building, Bengaluru, Karnataka
+₹4,76,375.63 - ₹17,76,312.74 a year
+Job details
+Here’s how the job details align with your profile.
+Pay
+
+₹4,76,375.63 - ₹17,76,312.74 a year
+Job type
+
+Full-time
+&nbsp;
+Location
+Bangalore Corporation Building, Bengaluru, Karnataka
+&nbsp;
+Full job description
+About Us
+
+The best way to predict the future is to invent it. And the best way to invent the future is to
+
+get the best minds to work on an idea whose time has come.
+
+Evam Labs (www.evamlabs.ai) is a Singapore headquartered holding company with
+
+offices in Bangalore and San Jose, building the next generation of high impact AI
+
+powered Enterprise Solutions. From Asia, for the World.
+
+The first two companies being built by Evam Labs are:
+
+● Propheus is on a mission to build the most comprehensive knowledge
+
+representation of every place on the Planet. The company’s solutions are powering
+
+various use cases across industries such as Retail, CPG, Real Estate and Government.
+
+● Poiro is building the next generation of AI Agents for Marketers to bring Brands
+
+closer to their customers.
+
+Our thesis is simple: How Enterprises leverage data to get insights and make decisions
+
+will get massively disrupted with AI creating a $1T+ opportunity. Evam Labs is at the
+
+forefront of this disruption.
+
+Evam Labs was founded by ex-founders, academics and investors with over a decade of
+
+experience in building data & AI products and scaling companies from 0 to IPO. The
+
+founders are IIT/IIM/CMU alumni and have cumulatively raised over $500M+, invested in 30+
+
+startups and hold 20+ patents. The rest of the Evam team comprises alumni of IITs, IIMs,
+
+CMU, IISc, NUS with rich experience across multiple industries.
+
+Role Overview - AI Engineer
+
+The AI Engineer is a hands-on role, positioned at the intersection of AI innovation,
+
+engineering excellence, and customer impact. You won't just build systems; you'll
+
+transform complex business challenges into simple, elegant, and scalable AI
+
+solutions. You will be instrumental in transforming nascent ideas into
+
+production-ready artifacts, leading the development cycle from initial concept to
+
+live deployment.
+
+These are full-time onsite roles at our office located in Bengaluru.
+
+Responsibilities
+
+● Work to design secure, scalable, and resilient AI systems, ensuring solutions are
+
+robust and future-proof
+
+● Build and improve backend services (APIs, data pipelines, and deployment setup)
+
+for AI applications
+
+● Learn from seniors and gradually help junior teammates or interns
+
+What we look for in Candidates
+
+● 1 to 3 years of professional experience in Data Engineering, or Machine Learning
+
+Engineering.
+
+● Any working experience with vision models like SAM, YOLO etc is a plus
+
+● Minimum 6 months of hands-on experience specifically designing, developing, and
+
+deploying solutions utilizing Generative AI models (GenAI).
+
+● Expert proficiency in Python for AI/ML development,
+
+● Experience with cloud computing platforms (e.g., AWS, GCP, Azure),
+
+● Demonstrated history of being a highly effective team player with excellent coding
+
+skills
+
+● Any working experience with image processing or computer vision (e.g., OpenCV,
+
+PIL, CNNs, diffusion models, etc.) is a strong plus
+
+Why Join Us?
+
+● Competitive salary and benefits
+
+● Be in an early stage company - grow with the company and shape our trajectory, in
+
+turn creating inorganic growth opportunities for yourself
+
+● Be in the right field at the right time - opportunity to grow and advance your career
+
+in the burgeoning field of AI
+
+● Be part of a fast-paced, ambitious research organization that is pushing the
+
+boundaries of AI across industries
+
+Pay: ₹476,375.63 - ₹1,776,312.74 per year
+
+Work Location: In person
