@@ -7,18 +7,23 @@ from .document_parser import extract_text
 from .jd_parser import parse_jd
 from .schemas import JobDescription
 from .pipeline import process_job_description
+from .services.candidate_search import CandidateSearchService
+
 
 app = FastAPI(
     title="Hunar Recruiter Platform",
     version="0.1.1",
 )
 
+candidate_search_service = CandidateSearchService()
+
 
 @app.get("/health")
 def health_check():
     return {"status": "double-ok-macha👍"}
 
-# end point that return parsed JD json
+
+# Endpoint that returns parsed JD JSON
 @app.post("/jobs/parse", response_model=JobDescription)
 async def parse_job_description(
     file: UploadFile = File(...),
@@ -51,17 +56,23 @@ async def parse_job_description(
             detail=str(exc),
         ) from exc
 
-# end point that return a list of selected agents for the give JD
+
 ALLOWED_EXTENSIONS = {".txt", ".pdf", ".docx"}
 
 
+# Endpoint that runs the complete JD analysis pipeline
 @app.post("/jobs/analyze")
-async def analyze_job(file: UploadFile = File(...)):
+async def analyze_job(
+    file: UploadFile = File(...),
+):
     """
-    Upload a JD and run the complete JD -> agent routing pipeline.
+    Upload a JD and run the complete:
+    JD -> agent routing -> candidate search pipeline.
     """
 
-    extension = Path(file.filename or "").suffix.lower()
+    extension = Path(
+        file.filename or ""
+    ).suffix.lower()
 
     if extension not in ALLOWED_EXTENSIONS:
         raise HTTPException(
@@ -83,6 +94,7 @@ async def analyze_job(file: UploadFile = File(...)):
     temp_path = None
 
     try:
+        # Save uploaded file temporarily
         with NamedTemporaryFile(
             suffix=extension,
             delete=False,
@@ -90,11 +102,29 @@ async def analyze_job(file: UploadFile = File(...)):
             temp_file.write(contents)
             temp_path = temp_file.name
 
+        # Existing pipeline:
+        # JD -> structured JD -> agent routing
         result = process_job_description(temp_path)
+
+        # Extract structured JD
+        job_description = result["job_description"]
+
+        # Make sure it is a JobDescription model
+        if not isinstance(job_description, JobDescription):
+            job_description = JobDescription.model_validate(
+                job_description
+            )
+
+        # New:
+        # structured JD -> PDL + demo candidates -> ranking
+        candidates = candidate_search_service.search(
+            job_description
+        )
 
         return {
             "filename": file.filename,
             **result,
+            "candidates": candidates,
         }
 
     except ValueError as exc:
@@ -104,7 +134,11 @@ async def analyze_job(file: UploadFile = File(...)):
         ) from exc
 
     except Exception as exc:
-        print(f"ERROR processing job: {type(exc).__name__}: {exc}")
+        print(
+            f"ERROR processing job: "
+            f"{type(exc).__name__}: {exc}"
+        )
+
         raise HTTPException(
             status_code=500,
             detail=f"{type(exc).__name__}: {exc}",
@@ -112,4 +146,6 @@ async def analyze_job(file: UploadFile = File(...)):
 
     finally:
         if temp_path:
-            Path(temp_path).unlink(missing_ok=True)
+            Path(temp_path).unlink(
+                missing_ok=True
+            )

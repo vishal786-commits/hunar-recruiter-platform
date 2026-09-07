@@ -1,0 +1,23 @@
+[
+  {
+    "id": "demo_vishal",
+    "name": "Vishal",
+    "phone_number": "7777777777",
+    "source": "demo_participant",
+    "is_demo": true
+  },
+  {
+    "id": "demo_akshaya",
+    "name": "Akshaya",
+    "phone_number": "7777777777",
+    "source": "demo_participant",
+    "is_demo": true
+  },
+  {
+    "id": "demo_mahesh",
+    "name": "Mahesh",
+    "phone_number": "7777777777",
+    "source": "demo_participant",
+    "is_demo": true
+  }
+]
