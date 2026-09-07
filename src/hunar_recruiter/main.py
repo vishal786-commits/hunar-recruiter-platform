@@ -10,6 +10,7 @@ from .pipeline import process_job_description
 from .services.candidate_search import CandidateSearchService
 
 from contextlib import asynccontextmanager
+import os
 from hunar_recruiter.db import init_db
 
 
@@ -29,10 +30,10 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ],
+    allow_origins=[origin.strip() for origin in os.getenv(
+        "FRONTEND_URLS",
+        "http://localhost:3000,http://127.0.0.1:3000",
+    ).split(",") if origin.strip()],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

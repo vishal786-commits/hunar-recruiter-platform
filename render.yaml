@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: hunar-recruiter-api
+    runtime: python
+    buildCommand: pip install -r req.txt
+    startCommand: uvicorn hunar_recruiter.main:app --host 0.0.0.0 --port $PORT --app-dir src
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: HUNAR_API_KEY
+        sync: false
+      - key: CANDIDATE_SOURCE
+        value: demo
+      - key: FRONTEND_URLS
+        sync: false

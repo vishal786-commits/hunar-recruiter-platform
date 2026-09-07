@@ -262,6 +262,65 @@ Frontend linting:
 npm run lint
 ```
 
+## Deployment
+
+Deploy the applications as two services:
+
+1. Deploy the FastAPI backend to a Python host such as Render.
+2. Deploy the `frontend/` directory to Vercel.
+
+### Backend deployment
+
+For Render, use:
+
+```text
+Build command: pip install -r req.txt
+Start command: uvicorn hunar_recruiter.main:app --host 0.0.0.0 --port $PORT --app-dir src
+```
+
+Set these backend environment variables:
+
+```env
+OPENAI_API_KEY=your-openai-key
+HUNAR_API_KEY=your-hunar-key
+CANDIDATE_SOURCE=demo
+FRONTEND_URLS=https://your-project.vercel.app
+```
+
+Verify the backend before deploying the frontend by opening:
+
+```text
+https://your-backend-host/health
+```
+
+### Vercel deployment
+
+Import the GitHub repository into Vercel and set:
+
+```text
+Root directory: frontend
+Framework preset: Next.js
+Build command: npm run build
+```
+
+Add this Vercel environment variable for the Production environment:
+
+```env
+NEXT_PUBLIC_API_BASE_URL=https://your-backend-host
+```
+
+Do not use `http://127.0.0.1:8000` or `http://localhost:8000` in Vercel. Those addresses refer to the visitor's own computer, not the deployed backend. Redeploy the Vercel project after changing environment variables.
+
+After Vercel provides the final domain, set that exact domain in the backend's `FRONTEND_URLS` value and redeploy the backend. Multiple frontend origins can be comma-separated.
+
+If the deployed frontend shows `Failed to fetch`, check these three items first:
+
+- The backend `/health` URL opens successfully from a browser.
+- `NEXT_PUBLIC_API_BASE_URL` is set in Vercel Production, not only in local `.env.local`.
+- The exact Vercel domain is included in the backend `FRONTEND_URLS` variable.
+
+Never commit `.env`, `.env.local`, or API keys. Rotate any key that has been exposed in a chat, screenshot, commit, or public repository.
+
 ## Design Principles
 
 - **Human approval before outreach**: candidate selection is explicit and visible.
