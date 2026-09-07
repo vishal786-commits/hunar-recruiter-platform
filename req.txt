@@ -10,3 +10,4 @@ openai
 sqlalchemy
 pydantic-settings
 pydantic
+ftfy

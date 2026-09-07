@@ -31,6 +31,10 @@ def load_demo_candidates() -> list[Candidate]:
         Candidate(
             id=record["id"],
             name=record["name"],
+            current_title=record.get("current_title"),
+            company=record.get("company"),
+            location=record.get("location"),
+            skills=record.get("skills", []),
             phone_number=record["phone_number"],
             phone_source="demo_participant",
             source="demo",

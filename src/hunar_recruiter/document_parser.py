@@ -1,32 +1,37 @@
 from io import BytesIO
 
+from ftfy import fix_text
+
 
 def extract_text(filename: str, content: bytes) -> str:
     filename = filename.lower()
 
     if filename.endswith(".txt"):
-        return content.decode("utf-8")
+        text = content.decode("utf-8")
 
-    if filename.endswith(".pdf"):
+    elif filename.endswith(".pdf"):
         from pypdf import PdfReader
 
         reader = PdfReader(BytesIO(content))
 
-        return "\n".join(
+        text = "\n".join(
             page.extract_text() or ""
             for page in reader.pages
         )
 
-    if filename.endswith(".docx"):
+    elif filename.endswith(".docx"):
         from docx import Document
 
         document = Document(BytesIO(content))
 
-        return "\n".join(
+        text = "\n".join(
             paragraph.text
             for paragraph in document.paragraphs
         )
 
-    raise ValueError(
-        "Unsupported file type. Supported types: .txt, .pdf, .docx"
-    )
+    else:
+        raise ValueError(
+            "Unsupported file type. Supported types: .txt, .pdf, .docx"
+        )
+
+    return fix_text(text)
