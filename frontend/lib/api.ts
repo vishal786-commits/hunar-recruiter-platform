@@ -1,11 +1,22 @@
-const API = process.env.NEXT_PUBLIC_API_BASE_URL!
+const API = (process.env.NEXT_PUBLIC_API_BASE_URL || "").replace(/\/$/, "")
 
 async function request(path: string, options?: RequestInit) {
-  const response = await fetch(`${API}${path}`, options)
+  if (!API) {
+    throw new Error("NEXT_PUBLIC_API_BASE_URL is not configured.")
+  }
+
+  const url = `${API}${path}`
+  let response: Response
+
+  try {
+    response = await fetch(url, options)
+  } catch {
+    throw new Error(`Unable to reach the API at ${API}.`)
+  }
 
   if (!response.ok) {
     const text = await response.text()
-    throw new Error(text || "Request failed")
+    throw new Error(`${response.status} ${response.statusText}: ${text || "Request failed"}`)
   }
 
   const data = await response.json()

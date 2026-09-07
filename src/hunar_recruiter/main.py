@@ -56,6 +56,15 @@ def health_check():
     return {"status": "double-ok-macha👍"}
 
 
+@app.get("/")
+def service_info():
+    return {
+        "service": "hunar-recruiter-api",
+        "status": "ok",
+        "docs": "/docs",
+    }
+
+
 # Endpoint that returns parsed JD JSON
 @app.post("/jobs/parse", response_model=JobDescription)
 async def parse_job_description(
