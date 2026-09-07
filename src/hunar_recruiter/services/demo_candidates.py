@@ -6,7 +6,13 @@ from pathlib import Path
 from hunar_recruiter.models.candidate import Candidate
 
 
-DEMO_FILE = Path("data/demo_candidates.json")
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+
+DEMO_FILE = (
+    PROJECT_ROOT
+    / "data"
+    / "demo_candidates.json"
+)
 
 
 def load_demo_candidates() -> list[Candidate]:
@@ -15,7 +21,10 @@ def load_demo_candidates() -> list[Candidate]:
             f"Demo candidate file not found: {DEMO_FILE}"
         )
 
-    with DEMO_FILE.open("r", encoding="utf-8") as file:
+    with DEMO_FILE.open(
+        "r",
+        encoding="utf-8",
+    ) as file:
         records = json.load(file)
 
     return [

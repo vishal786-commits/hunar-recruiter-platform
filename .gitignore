@@ -37,3 +37,5 @@ htmlcov/
 Thumbs.db
 
 data/demo_candidates.json
+
+# data/*.db

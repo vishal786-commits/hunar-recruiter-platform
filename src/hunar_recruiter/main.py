@@ -9,14 +9,32 @@ from .schemas import JobDescription
 from .pipeline import process_job_description
 from .services.candidate_search import CandidateSearchService
 
+from contextlib import asynccontextmanager
+from hunar_recruiter.db import init_db
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_db()
+    yield
+
 
 app = FastAPI(
     title="Hunar Recruiter Platform",
     version="0.1.1",
+    lifespan=lifespan,
 )
 
 candidate_search_service = CandidateSearchService()
 
+from hunar_recruiter.api.job_routes import router as job_router
+
+app.include_router(job_router)
+
+from hunar_recruiter.api.screening_routes import (
+    router as screening_router,
+)
+
+app.include_router(screening_router)
 
 @app.get("/health")
 def health_check():
@@ -59,11 +77,17 @@ async def parse_job_description(
 
 ALLOWED_EXTENSIONS = {".txt", ".pdf", ".docx"}
 
+from fastapi import Depends
+from sqlalchemy.orm import Session
+
+from hunar_recruiter.db import get_db
+from hunar_recruiter.services.job_persistence import persist_analysis
 
 # Endpoint that runs the complete JD analysis pipeline
 @app.post("/jobs/analyze")
 async def analyze_job(
     file: UploadFile = File(...),
+    db: Session = Depends(get_db),
 ):
     """
     Upload a JD and run the complete:
@@ -92,6 +116,18 @@ async def analyze_job(
         )
 
     temp_path = None
+    jd_text = extract_text(
+        file.filename,
+        contents,
+    )
+
+    if not jd_text.strip():
+        raise HTTPException(
+            status_code=400,
+            detail="Could not extract text from the JD.",
+        )
+
+
 
     try:
         # Save uploaded file temporarily
@@ -120,11 +156,18 @@ async def analyze_job(
         candidates = candidate_search_service.search(
             job_description
         )
-
+        job = persist_analysis(
+            db,
+            raw_jd=jd_text,
+            job_description=job_description.model_dump(),
+            agent_routing=result["agent_routing"],
+            candidates=candidates,
+        )
         return {
             "filename": file.filename,
             **result,
             "candidates": candidates,
+            "job_id": job.id,
         }
 
     except ValueError as exc:

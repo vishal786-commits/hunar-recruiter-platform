@@ -7,3 +7,6 @@ python-multipart
 pypdf 
 python-docx
 openai
+sqlalchemy
+pydantic-settings
+pydantic
